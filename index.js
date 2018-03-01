@@ -15,9 +15,7 @@ const app = express();
 mongoose.connect(`mongodb://${host}:${port}/${name}`);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
-db.once('open', () => {
-    console.log('MongoDb: Connection Successful!');
-});
+db.once('open', () => console.log('MongoDb: Connection Successful!'));
 
 // App basic setup
 app.use(morgan('combined'));

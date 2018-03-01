@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bCrypt from 'bcrypt';
 
 const Schema = mongoose.Schema;
 
@@ -8,6 +9,24 @@ const userSchema = new Schema({
     password: String
 }, {
     collection: "Users"
+});
+
+// On save hook, encrypt password
+userSchema.pre('save', function(next) {
+    const user = this;
+    
+    bCrypt.genSalt(10, (err, salt) => {
+        if (err)
+            return next(err);
+
+        bCrypt.hash(user.password, salt, (err, hash) => {
+            if (err)
+                return next(err);
+
+            user.password = hash;
+            next();
+        })
+    });    
 });
 
 // Create the model class
