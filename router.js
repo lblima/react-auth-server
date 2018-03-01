@@ -1,7 +1,5 @@
-export default (app) => {
+import authentication from './controllers/authentication';
 
-    app.route('/')
-        .get((req, res, next) => {
-            res.send(['waterbottle', 'phone', 'paper']);
-        });
+export default (app) => {
+    app.post("/signup", authentication.signup);
 }

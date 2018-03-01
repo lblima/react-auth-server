@@ -6,10 +6,12 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     email: { type: String, unique: true, lowercase: true },
     password: String
+}, {
+    collection: "Users"
 });
 
 // Create the model class
-const ModelClass = mongoose.model('user', userSchema);
+const User = mongoose.model('User', userSchema);
 
 // Export the model
-export default ModelClass;
+export default User;
