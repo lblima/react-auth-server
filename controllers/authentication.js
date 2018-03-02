@@ -45,7 +45,10 @@ const auth = {
 
             // Respond to request indicating the user was created
         });       
-    }    
+    },
+    signin: (req, res, next) => {
+        res.send({ token: tokenForUser(req.user) });
+    }
 } 
 
 export default auth;

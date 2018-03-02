@@ -29,6 +29,15 @@ userSchema.pre('save', function(next) { // is not possible to use arrows functio
     });    
 });
 
+userSchema.methods.comparePassword = function(candidatePassword, callback) { // Cannot be use arrow function here (don´t know why)
+    bCrypt.compare(candidatePassword, this.password, (err, isMatch) => {
+        if (err)
+            return callback(err);
+        
+        callback(null, isMatch);
+    });
+}
+
 // Create the model class
 const User = mongoose.model('User', userSchema);
 
