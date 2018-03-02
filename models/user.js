@@ -12,7 +12,7 @@ const userSchema = new Schema({
 });
 
 // On save hook, encrypt password
-userSchema.pre('save', function(next) {
+userSchema.pre('save', function(next) { // is not possible to use arrows function here (I don´t know why)
     const user = this;
     
     bCrypt.genSalt(10, (err, salt) => {

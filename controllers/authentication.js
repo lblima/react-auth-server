@@ -1,5 +1,16 @@
 import User from '../models/user';
 import httpStatus from 'http-status';
+import config from '../config';
+import jwt from 'jwt-simple';
+
+const tokenForUser = (user) => {
+    const payload = {
+        sub: user.id,
+        iat: new Date().getTime()
+    };
+
+    return jwt.encode( payload, config.secret);
+}
 
 const auth = {
     signup: (req, res, next) => {        
@@ -28,8 +39,8 @@ const auth = {
             user.save((err) => {
                 if (err)
                     return next(err);
-                
-                res.json({ success: 'true' });
+
+                res.json({ token: tokenForUser(user) });
             });
 
             // Respond to request indicating the user was created
