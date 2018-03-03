@@ -1,8 +1,5 @@
 import passport from 'passport';
-import {
-    Strategy as JwtStrategy,
-    ExtractJwt
-} from 'passport-jwt';
+import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import LocalStrategy from 'passport-local';
 import User from '../models/user';
 import config from '../config';
@@ -39,15 +36,12 @@ const localOptions = {
 
 const localLoginStrategy = new LocalStrategy(localOptions, (email, password, done) => {
     // Verify email and password, call done with user if user email and password was correct, otherwise call done with false
-    User.findOne({
-        email: email
-    }, (err, user) => {
+    User.findOne({ email: email }, (err, user) => {
         if (err)
             return done(err);
 
         if (user) {
             // Compare password
-            console.log(password);
             user.comparePassword(password, (err, isMatch) => {
                 if (err)
                     return done(err);
