@@ -31,7 +31,7 @@ const jwtLoginStrategy = new JwtStrategy(jwtOptions, (payload, done) => {
 // Create local strategy ===============================================
 const localOptions = {
     usernameField: 'email', // The default field is userName, that´s why we need provide explicity the email
-    passwordField: 'password' // We don´t need provide this password, it´s a default field
+    // passwordField: 'password' // We don´t need provide this password, it´s a default field
 };
 
 const localLoginStrategy = new LocalStrategy(localOptions, (email, password, done) => {
