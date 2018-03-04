@@ -11,7 +11,7 @@ const requireSign = passportService.authenticateLlocal();
 
 export default (app) => {
     app.get("/", requireAuth, (req, res, next) => {
-        res.send({ message: 'Hi there! Welcome to my React security app' });
+        res.send({ message: 'Hi there! Welcome to my React security app from server' });
     });
     app.post("/signup", authentication.signup);
     app.post("/signin", requireSign, authentication.signin);
